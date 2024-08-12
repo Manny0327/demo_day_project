@@ -53,3 +53,39 @@ function handleFormSubmit(event) {
 }
 salaryInput.addEventListener("input",updateSalaryDisplay);
 submitBtn.addEventListener("click", handleFormSubmit);
+
+// New button to add more expenses
+
+document.getElementById('addBarButton').addEventListener('click', function() {
+    const form = document.getElementById('budget_form');
+
+    // Create a new div element for the new bill input
+    const newDiv = document.createElement('div');
+
+    // Generate a unique ID for the new input
+    const billInputs = form.querySelectorAll('input[type="number"]').length;
+    const newId = `bill_input_${billInputs + 1}`;
+
+    // Create the label element
+    const newLabel = document.createElement('label');
+    newLabel.setAttribute('for', newId);
+    newLabel.innerHTML = `Other bill: `;
+
+    // Create the input element
+    const newInput = document.createElement('input');
+    newInput.setAttribute('type', 'number');
+    newInput.setAttribute('id', newId);
+    newInput.setAttribute('placeholder', '  Enter cost here');
+
+    // Append the label and input to the new div
+    newDiv.appendChild(newLabel);
+    newDiv.appendChild(newInput);
+
+    // Add some spacing using CSS
+    newDiv.style.marginBottom = '20px';
+    newInput.style.marginLeft = '3vw'
+
+    // Append the new div before the "Add Bill Section" button
+    form.insertBefore(newDiv, document.getElementById('addBarButton'));
+});
+
